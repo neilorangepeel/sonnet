@@ -11,7 +11,7 @@
 * Upload images at least 1000px x 1000px for home page grid.
 * Upload any logo dimensions, current logo is 180px x 40px.
 
-Checkout the [Sonnet Installation Video](https://vimeo.com/100393332) on [Vimeo](https://vimeo.com/tinktank)
+Checkout the [Sonnet Installation Video](https://vimeo.com/100393332) on [Vimeo](https://vimeo.com/tinktank) (video might be a little out of date 😉)
 
 ## Version
 

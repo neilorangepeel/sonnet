@@ -286,13 +286,6 @@
 		"oF": 0,
 		"oS": 0
 		},
-	"\/LICENSE": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/LICENSE",
-		"oF": 0
-		},
 	"\/page.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -308,22 +301,15 @@
 		"ema": 1,
 		"eSQ": 1,
 		"ft": 4096,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "\/README.html",
-		"oF": 0,
+		"oF": 1,
 		"oFM": 0,
 		"oS": 0,
 		"pHT": 0,
 		"pME": 1,
 		"rFN": 0,
 		"uCM": 0
-		},
-	"\/readme.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/readme.txt",
-		"oF": 0
 		},
 	"\/rtl.css": {
 		"aP": 1,
@@ -434,7 +420,7 @@
 	},
 "projectAttributes": {
 	"creationDate": 507723819,
-	"displayValue": "tt-sonnet",
+	"displayValue": "sonnet",
 	"displayValueWasSetByUser": 0,
 	"iconImageName": "meme-confession"
 	},
