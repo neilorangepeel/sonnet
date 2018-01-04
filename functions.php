@@ -1,0 +1,175 @@
+<?php
+/**
+ * sonnet functions and definitions
+ *
+ * @link https://developer.wordpress.org/themes/basics/theme-functions/
+ *
+ * @package sonnet
+ */
+
+if ( ! function_exists( 'tt_sonnet_setup' ) ) :
+/**
+ * Sets up theme defaults and registers support for various WordPress features.
+ *
+ * Note that this function is hooked into the after_setup_theme hook, which
+ * runs before the init hook. The init hook is too late for some features, such
+ * as indicating support for post thumbnails.
+ */
+function tt_sonnet_setup() {
+	/*
+	 * Make theme available for translation.
+	 * Translations can be filed in the /languages/ directory.
+	 * If you're building a theme based on sonnet, use a find and replace
+	 * to change 'tt-sonnet' to the name of your theme in all the template files.
+	 */
+	load_theme_textdomain( 'tt-sonnet', get_template_directory() . '/languages' );
+
+	// Add default posts and comments RSS feed links to head.
+	add_theme_support( 'automatic-feed-links' );
+
+	/*
+	 * Let WordPress manage the document title.
+	 * By adding theme support, we declare that this theme does not use a
+	 * hard-coded <title> tag in the document head, and expect WordPress to
+	 * provide it for us.
+	 */
+	add_theme_support( 'title-tag' );
+
+	/*
+	 * Enable support for Post Thumbnails on posts and pages.
+	 *
+	 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+	 */
+	add_theme_support( 'post-thumbnails' );
+
+	// This theme uses wp_nav_menu() in one location.
+	register_nav_menus( array(
+		'top'    => __( 'Top Menu', 'tt-sonnet' ),
+		'social' => __( 'Social Menu', 'tt-sonnet' ),
+	) );
+
+	/*
+	 * Switch default core markup for search form, comment form, and comments
+	 * to output valid HTML5.
+	 */
+	add_theme_support( 'html5', array(
+		'search-form',
+		'comment-form',
+		'comment-list',
+		'gallery',
+		'caption',
+	) );
+
+	// Add theme support for selective refresh for widgets.
+	add_theme_support( 'customize-selective-refresh-widgets' );
+}
+endif;
+add_action( 'after_setup_theme', 'tt_sonnet_setup' );
+
+
+/**
+ * Set the content width in pixels, based on the theme's design and stylesheet.
+ *
+ * Priority 0 to make it available to lower priority callbacks.
+ *
+ * @global int $content_width
+ */
+function tt_sonnet_content_width() {
+	$GLOBALS['content_width'] = apply_filters( 'tt_sonnet_content_width', 550 );
+}
+add_action( 'after_setup_theme', 'tt_sonnet_content_width', 0 );
+
+
+/**
+  * Register widget area.
+  *
+  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
+  */
+ function sonnet_widgets_init() {
+ 	register_sidebar( array(
+ 		'name'          => esc_html__( 'Sidebar Widgets', 'tt-sonnet' ),
+ 		'id'            => 'sidebar-widgets',
+ 		'description'   => esc_html__( 'These are widgets for the sidebar.', 'tt-sonnet' ),
+ 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
+ 		'after_widget'  => '</section>',
+ 		'before_title'  => '<h4 class="widget-title">',
+ 		'after_title'   => '</h4>',
+ 	) );
+
+    register_sidebar( array(
+        'name'          => esc_html__( 'Footer Widgets', 'tt-sonnet' ),
+        'id'            => 'footer-widgets',
+        'description'   => esc_html__( 'These are widgets for the footer.', 'tt-sonnet' ),
+        'before_widget' => '<section id="%1$s" class="widget %2$s col-1-4">',
+        'after_widget'  => '</section>',
+        'before_title'  => '<h4 class="widget-title">',
+        'after_title'   => '</h4>',
+    ) );
+ }
+ add_action( 'widgets_init', 'sonnet_widgets_init' );
+
+
+/**
+ * Adding various image sizes.
+ */
+if ( function_exists( 'add_image_size' ) ) {
+	add_image_size( '5x4', 800, 640, true );
+	add_image_size( '1x1', 600, 600, true );
+	add_image_size( 'halfWidth', 1200, 9999 );
+	add_image_size( 'fullWidth', 1600, 9999 );
+}
+
+
+/**
+ * Adding excerpt to page.
+ */
+function add_excerpts_to_pages() {
+	 add_post_type_support( 'page', 'excerpt' );
+}
+add_action( 'init', 'add_excerpts_to_pages' );
+
+
+/**
+ * Enqueue scripts and styles.
+ */
+function tt_sonnet_scripts() {
+	wp_enqueue_style( 'tt-sonnet-style', get_stylesheet_uri() );
+
+	// Load the google fonts
+	wp_enqueue_style('tt-sonnet-googleFonts', '//fonts.googleapis.com/css?family=Raleway:600,700,800');
+
+	wp_enqueue_script( 'tt-sonnet-skip-link-focus-fix', get_template_directory_uri() . '/assets/js/skip-link-focus-fix.js', array(), '20151215', true );
+	wp_enqueue_script( 'jessiebrett-v2-theme', get_template_directory_uri() . '/assets/js/theme-min.js', array('jquery'),  false, true );
+
+
+	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+		wp_enqueue_script( 'comment-reply' );
+	}
+}
+add_action( 'wp_enqueue_scripts', 'tt_sonnet_scripts' );
+
+/**
+ * Custom template tags for this theme.
+ */
+require get_template_directory() . '/inc/template-tags.php';
+
+/**
+ * Custom functions that act independently of the theme templates.
+ */
+require get_template_directory() . '/inc/extras.php';
+
+/**
+ * Customizer additions.
+ */
+require get_template_directory() . '/inc/icon-functions.php';
+
+/**
+ * Customizer additions.
+ */
+require get_template_directory() . '/inc/customizer.php';
+require get_template_directory() . '/inc/customizer-css.php';
+
+/**
+ * Load Jetpack compatibility file.
+ */
+require get_template_directory() . '/inc/jetpack.php';
