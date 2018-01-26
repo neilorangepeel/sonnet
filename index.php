@@ -109,8 +109,6 @@ get_header(); ?>
 				<?php $i++; ?>
 				<!--------->
 
-			<?php
-
 
 
 		        <?php wp_reset_postdata(); ?>
